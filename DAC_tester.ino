@@ -230,13 +230,13 @@ void read_LCD_buttons() {
         } else if (cursorState[0] == 5) {
           data12 *= (-1);
         } else if (cursorState[0] == 10) {
-          data13 *= (-1);
-        } else if (cursorState[0] <= 5) {
-          data11 += (data11 / abs(data11)) * pow(10, 4 - cursorState[0] % 5);
-        } else if (cursorState[0] <= 10) {
-          data12 += (data12 / abs(data12)) * pow(10, 4 - cursorState[0] % 5);
-        } else if (cursorState[0] <= 15) {
-          data13 += (data13 / abs(data13)) * pow(10, 4 - cursorState[0] % 5);
+          data13 = 8000;
+        } else if (cursorState[0] < 5) {
+          data11 += ((data11<0)?-1:1) * ((4 - cursorState[0] % 5)>2?1000:((4 - cursorState[0] % 5)>1?100:((4 - cursorState[0] % 5)>0?10:1)));
+        } else if (cursorState[0] < 10) {
+          data12 += ((data12<0)?-1:1) * ((4 - cursorState[0] % 5)>2?1000:((4 - cursorState[0] % 5)>1?100:((4 - cursorState[0] % 5)>0?10:1)));
+        } else if (cursorState[0] < 15) {
+          data13 += ((data13<0)?-1:1) * ((4 - cursorState[0] % 5)>2?1000:((4 - cursorState[0] % 5)>1?100:((4 - cursorState[0] % 5)>0?10:1)));
         }
       } else if (cursorState[1] == 1) {
         if (cursorState[0] == 15) {
@@ -246,13 +246,13 @@ void read_LCD_buttons() {
         } else if (cursorState[0] == 5) {
           data22 *= (-1);
         } else if (cursorState[0] == 10) {
-          data23 *= (-1);
-        } else if (cursorState[0] <= 5) {
-          data21 += (data21 / abs(data21)) * pow(10, 4 - cursorState[0] % 5);
-        } else if (cursorState[0] <= 10) {
-          data22 += (data22 / abs(data22)) * pow(10, 4 - cursorState[0] % 5);
-        } else if (cursorState[0] <= 15) {
-          data23 += (data23 / abs(data23)) * pow(10, 4 - cursorState[0] % 5);
+          data23 = 8000;
+        } else if (cursorState[0] < 5) {
+          data21 += ((data21<0)?-1:1) * ((4 - cursorState[0] % 5)>2?1000:((4 - cursorState[0] % 5)>1?100:((4 - cursorState[0] % 5)>0?10:1)));
+        } else if (cursorState[0] < 10) {
+          data22 += ((data22<0)?-1:1) * ((4 - cursorState[0] % 5)>2?1000:((4 - cursorState[0] % 5)>1?100:((4 - cursorState[0] % 5)>0?10:1)));
+        } else if (cursorState[0] < 15) {
+          data23 += ((data23<0)?-1:1) * ((4 - cursorState[0] % 5)>2?1000:((4 - cursorState[0] % 5)>1?100:((4 - cursorState[0] % 5)>0?10:1)));
         }
       }
       delay(delayMSec);
@@ -267,13 +267,13 @@ void read_LCD_buttons() {
         } else if (cursorState[0] == 5) {
           data12 *= (-1);
         } else if (cursorState[0] == 10) {
-          data13 *= (-1);
-        } else if (cursorState[0] <= 5) {
-          data11 -= (data11 / abs(data11)) * pow(10, 4 - cursorState[0] % 5);
-        } else if (cursorState[0] <= 10) {
-          data12 -= (data12 / abs(data12)) * pow(10, 4 - cursorState[0] % 5);
-        } else if (cursorState[0] <= 15) {
-          data13 -= (data13 / abs(data13)) * pow(10, 4 - cursorState[0] % 5);
+          data13 = 0;
+        } else if (cursorState[0] < 5) {
+          data11 -= ((data11<0)?-1:1) * ((4 - cursorState[0] % 5)>2?1000:((4 - cursorState[0] % 5)>1?100:((4 - cursorState[0] % 5)>0?10:1)));
+        } else if (cursorState[0] < 10) {
+          data12 -= ((data12<0)?-1:1) * ((4 - cursorState[0] % 5)>2?1000:((4 - cursorState[0] % 5)>1?100:((4 - cursorState[0] % 5)>0?10:1)));
+        } else if (cursorState[0] < 15) {
+          data13 -= ((data13<0)?-1:1) * ((4 - cursorState[0] % 5)>2?1000:((4 - cursorState[0] % 5)>1?100:((4 - cursorState[0] % 5)>0?10:1)));
         }
       } else if (cursorState[1] == 1) {
         if (cursorState[0] == 15) {
@@ -283,13 +283,13 @@ void read_LCD_buttons() {
         } else if (cursorState[0] == 5) {
           data22 *= (-1);
         } else if (cursorState[0] == 10) {
-          data23 *= (-1);
-        } else if (cursorState[0] <= 5) {
-          data21 -= (data21 / abs(data21)) * pow(10, 4 - cursorState[0] % 5);
-        } else if (cursorState[0] <= 10) {
-          data22 -= (data22 / abs(data22)) * pow(10, 4 - cursorState[0] % 5);
-        } else if (cursorState[0] <= 15) {
-          data23 -= (data23 / abs(data23)) * pow(10, 4 - cursorState[0] % 5);
+          data23 = 0;
+        } else if (cursorState[0] < 5) {
+          data21 -= ((data21<0)?-1:1) * ((4 - cursorState[0] % 5)>2?1000:((4 - cursorState[0] % 5)>1?100:((4 - cursorState[0] % 5)>0?10:1)));
+        } else if (cursorState[0] < 10) {
+          data22 -= ((data22<0)?-1:1) * ((4 - cursorState[0] % 5)>2?1000:((4 - cursorState[0] % 5)>1?100:((4 - cursorState[0] % 5)>0?10:1)));
+        } else if (cursorState[0] < 15) {
+          data23 -= ((data23<0)?-1:1) * ((4 - cursorState[0] % 5)>2?1000:((4 - cursorState[0] % 5)>1?100:((4 - cursorState[0] % 5)>0?10:1)));
         }
       }
       delay(delayMSec);
@@ -355,8 +355,12 @@ void transmit() {
     Serial.println(transmitData);
   }
 
+  lcd.noBlink();
+  delay(transmitDelay);
+  delay(transmitDelay);
   lcd.setCursor(cursorState[0], cursorState[1]);
   lcd.write(0x3E);
+  delay(transmitDelay);
   delay(transmitDelay);
   lcd.setCursor(cursorState[0], cursorState[1]);
   lcd.write((byte)0);
@@ -372,13 +376,19 @@ void transmit() {
   delay(transmitDelay);
   lcd.setCursor(cursorState[0], cursorState[1]);
   lcd.write(0x3E);
+  delay(transmitDelay);
+  lcd.blink();
 }
 
 void stopNow(){
   Serial.println("j0000000000000000x");
-  
+
+  lcd.noBlink();
+  delay(transmitDelay);
+  delay(transmitDelay);
   lcd.setCursor(cursorState[0], cursorState[1]);
   lcd.write(0x3C);
+  delay(transmitDelay);
   delay(transmitDelay);
   lcd.setCursor(cursorState[0], cursorState[1]);
   lcd.write((byte)4);
@@ -394,6 +404,8 @@ void stopNow(){
   delay(transmitDelay);
   lcd.setCursor(cursorState[0], cursorState[1]);
   lcd.write(0x3C);
+  delay(transmitDelay);
+  lcd.blink();
 }
 
 
