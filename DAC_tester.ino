@@ -1,7 +1,19 @@
-#include <LiquidCrystal.h>
 
+/*
+ * 
+ * 
+ * 
+ * 
+ * 
+*/
+
+
+#include <LiquidCrystal.h>
 // for LCD shield
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
+
+#include <SoftwareSerial.h>
+SoftwareSerial mySerial(11, 12); // (rx, tx)
 
 byte bow0[8] = {
   0b00100,
@@ -112,13 +124,20 @@ void setup() {
   
   pinMode(2,OUTPUT);
   digitalWrite(2,LOW);
+  
+  pinMode(3,OUTPUT);
+  digitalWrite(3,LOW);
 
   Serial.begin(9600);
+  mySerial.begin(9600);
 
   lcd.begin(16, 2);
 
 
   lcd.print("  HORIO  JAPAN");
+  delay(1500);
+  lcd.setCursor(0, 1);
+  lcd.print("DAC Tester");
   lcd.createChar(0, bow0);
   lcd.createChar(1, bow1);
   lcd.createChar(2, bow2);
@@ -127,6 +146,12 @@ void setup() {
   lcd.createChar(5, bow5);
   lcd.createChar(6, bow6);
   lcd.createChar(7, bow7);
+  delay(1500);
+  lcd.setCursor(0, 0);
+  lcd.print("Software serial");
+  delay(1000);
+  lcd.setCursor(0, 1);
+  lcd.print("3GND 11:RX 12:TX");
   delay(3000);
   lcd.clear();
 
@@ -173,6 +198,10 @@ void loop() {
   read_LCD_buttons();
   lcd.setCursor(cursorState[0], cursorState[1]);
 
+  while (mySerial.available())
+    Serial.write(mySerial.read());
+  while (Serial.available())
+    mySerial.write(Serial.read());
 }
 
 void showData(int data) {
@@ -344,7 +373,7 @@ void transmit() {
     makeString(data12);
     makeString(data13);
     transmitData += "x";
-    Serial.println(transmitData);
+    mySerial.println(transmitData);
   } else if (cursorState[1] == 1) {
     transmitData = "j";
     transmitData += "1";
@@ -352,7 +381,7 @@ void transmit() {
     makeString(data22);
     makeString(data23);
     transmitData += "x";
-    Serial.println(transmitData);
+    mySerial.println(transmitData);
   }
 
   lcd.noBlink();
@@ -381,7 +410,7 @@ void transmit() {
 }
 
 void stopNow(){
-  Serial.println("j0000000000000000x");
+  mySerial.println("j0000000000000000x");
 
   lcd.noBlink();
   delay(transmitDelay);
